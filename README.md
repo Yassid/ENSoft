@@ -1,5 +1,10 @@
 ENSoft
 ======
+Developers:
+
+Y. Ayyad - RCNP Osaka (yassid.ayyad@rcnp.osaka-u.ac.jp)
+T.D. Trong - RCNP Osaka (tdtrong@rcnp.osaka-u.ac.jp)
+
 
 RCNP EN Course analysis software
 
