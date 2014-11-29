@@ -17,7 +17,11 @@
 #define Art_NUM_CHAN 8
 
 #include "TGo4EventElement.h"
+<<<<<<< HEAD
 #include "analysisFlag.h"
+=======
+
+>>>>>>> develop
 class TArtUnpackEvent : public TGo4EventElement {
    public:
  /*     struct mapping{
@@ -42,9 +46,29 @@ class TArtUnpackEvent : public TGo4EventElement {
        * event element.
        */
       virtual void Clear(Option_t *t="");
+<<<<<<< HEAD
       Int_t rawdata[maxFP][maxDet][maxMod][maxCh];
       Int_t v1190[maxDetV][maxChV][maxHit];
 
+=======
+      Int_t rawdata[4][100][100][33];
+      Int_t v1190[60][128][20];
+/*      mapping rawdatan[1000];
+      Int_t numch;
+
+      Int_t vmi01[21][32];
+      Int_t vmi02[21][32];
+      Int_t sva01[21][32];
+      Int_t sva02[21][32];
+      Int_t v7768[21][32];
+
+      // For V1190
+      Int_t vmi01_tdc[20][128][20];
+      Int_t sva01_tdc[20][128][20];
+      Int_t sva02_tdc[20][128][20];
+      Int_t v7768_tdc[20][128][20];
+*/
+>>>>>>> develop
    private:
      
    ClassDef(TArtUnpackEvent,1)

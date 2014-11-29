@@ -13,7 +13,11 @@
 #include "TArtRawEvent.h"
 #include "TArtUnpackEvent.h"
 #include "segidlist.h"
+<<<<<<< HEAD
 #include "analysisFlag.h"
+=======
+
+>>>>>>> develop
 //***********************************************************
 TArtProc::TArtProc() : TGo4EventProcessor("Proc")
 {
@@ -97,11 +101,15 @@ Bool_t TArtProc::BuildEvent(TGo4EventElement* target)
 		    } 	
 		  }
 		  else{
+<<<<<<< HEAD
 		    if (segid1<maxFP && detid<maxDet && modid<maxMod && ch< maxCh ) out_evt->rawdata[segid1][detid][modid][ch]=val;
 	            else{
 			cout<<"TArtProc::BuildEvent-Error at "<<cadid<<"-"<<segid1<<"-"<<detid<<"-"<<modid<<"-"<<ch<<"  Stop now!!!"<<endl;
 	 		exit(1);
                     }
+=======
+		    if (ch< 64) out_evt->rawdata[segid1][detid][modid][ch]=val;
+>>>>>>> develop
 		  }
               /*    out_evt->rawdatan[nch].filled = 1;
                   out_evt->rawdatan[nch].cad = cadid;
