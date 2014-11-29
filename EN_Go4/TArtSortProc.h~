@@ -22,7 +22,7 @@
 class TArtSortEvent;
 class TArtUnpackEvent;
 class EN_PPAC_Cal;
-//class ENFiberCal;
+class ENFiberCal;
 class ENPlastic;
 class EN_CsI;
 class EN_Neutron;
@@ -42,7 +42,7 @@ class TArtSortProc : public TGo4EventProcessor {
 //      TArtF3Param      *fF3Param;
 
       EN_PPAC_Cal 	*ppac;
-//      ENFiberCal	*fiber; 
+      ENFiberCal	*fiber; 
       ENPlastic		*plastic;
       EN_CsI		*csi;
       EN_Neutron	*neutron;	

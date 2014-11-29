@@ -17,6 +17,7 @@
 #include "TGo4EventProcessor.h"
 #include "TArtUnpackEvent.h"
 #include "TRandom.h"
+//#include "analysisFlag.h"
 #include <fstream>
 
 class TArtSortEvent;
@@ -48,7 +49,7 @@ class TArtSortProc : public TGo4EventProcessor {
       EN_Neutron	*neutron;	
 
       TGo4PolyCond      *gate[20];
-      TH1 *hExpDet[1000];
+      TH1 *hExpDet[5000];
  private:
       Int_t analist[10];
       Int_t showrawdata;
@@ -107,9 +108,9 @@ class TArtSortProc : public TGo4EventProcessor {
     	Int_t val;
         TH2* hHist2;
       };
-      mapping ExpDetRaw[1000];
-      hst1 hist1[1000];
-      hst2 hist2[1000];
+      mapping ExpDetRaw[5000];
+      hst1 hist1[5000];
+      hst2 hist2[5000];
       hst1 gate1[10];
       hst2 gate2[10];
       int nhst1,nhst2,ngate1,ngate2;
