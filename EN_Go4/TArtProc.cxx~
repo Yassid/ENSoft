@@ -99,8 +99,8 @@ Bool_t TArtProc::BuildEvent(TGo4EventElement* target)
 		  else{
 		    if (segid1<maxFP && detid<maxDet && modid<maxMod && ch< maxCh ) out_evt->rawdata[segid1][detid][modid][ch]=val;
 	            else{
-			cout<<"TArtProc::BuildEvent-Error at "<<segid1<<"-"<<detid<<"-"<<modid<<"-"<<ch<<"  Stop now!!!"<<endl;
-	 		return kFALSE;
+			cout<<"TArtProc::BuildEvent-Error at "<<cadid<<"-"<<segid1<<"-"<<detid<<"-"<<modid<<"-"<<ch<<"  Stop now!!!"<<endl;
+	 		exit(1);
                     }
 		  }
               /*    out_evt->rawdatan[nch].filled = 1;

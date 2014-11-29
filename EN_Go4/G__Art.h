@@ -33,6 +33,7 @@ extern void G__set_cpp_environmentG__Art();
 #include "TMemberInspector.h"
 #include "./analysisFlag.h"
 #include "./EN_CsI.h"
+#include "./ENFiberCal.h"
 #include "./EN_Neutron.h"
 #include "./ENOthers.h"
 #include "./ENPlastic.h"
@@ -77,6 +78,7 @@ extern G__linked_taginfo G__G__ArtLN_maplEstringcOTObjArraymUcOlesslEstringgRcOa
 extern G__linked_taginfo G__G__ArtLN_vectorlETStringcOallocatorlETStringgRsPgR;
 extern G__linked_taginfo G__G__ArtLN_reverse_iteratorlEvectorlETStringcOallocatorlETStringgRsPgRcLcLiteratorgR;
 extern G__linked_taginfo G__G__ArtLN_EN_CsI;
+extern G__linked_taginfo G__G__ArtLN_ENFiberCal;
 extern G__linked_taginfo G__G__ArtLN_EN_Neutron;
 extern G__linked_taginfo G__G__ArtLN_ENPlastic;
 extern G__linked_taginfo G__G__ArtLN_EN_PPAC_Cal;
@@ -115,7 +117,6 @@ extern G__linked_taginfo G__G__ArtLN_vectorlETArtRawSegmentObjectmUcOallocatorlE
 extern G__linked_taginfo G__G__ArtLN_reverse_iteratorlEvectorlETArtRawSegmentObjectmUcOallocatorlETArtRawSegmentObjectmUgRsPgRcLcLiteratorgR;
 extern G__linked_taginfo G__G__ArtLN_vectorlETArtRawScalerObjectmUcOallocatorlETArtRawScalerObjectmUgRsPgR;
 extern G__linked_taginfo G__G__ArtLN_reverse_iteratorlEvectorlETArtRawScalerObjectmUcOallocatorlETArtRawScalerObjectmUgRsPgRcLcLiteratorgR;
-extern G__linked_taginfo G__G__ArtLN_ENFiberCal;
 extern G__linked_taginfo G__G__ArtLN_TArtSortProc;
 extern G__linked_taginfo G__G__ArtLN_TArtSortProccLcLmapping;
 extern G__linked_taginfo G__G__ArtLN_TArtSortProccLcLhst1;

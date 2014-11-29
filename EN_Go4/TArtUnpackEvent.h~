@@ -42,8 +42,8 @@ class TArtUnpackEvent : public TGo4EventElement {
        * event element.
        */
       virtual void Clear(Option_t *t="");
-      Int_t rawdata[maxFP+1][maxDet+1][maxMod+1][maxCh+1];
-      Int_t v1190[maxDetV+1][maxChV+1][maxHit+1];
+      Int_t rawdata[maxFP][maxDet][maxMod][maxCh];
+      Int_t v1190[maxDetV][maxChV][maxHit];
 
    private:
      
