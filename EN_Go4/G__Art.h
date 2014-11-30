@@ -33,6 +33,7 @@ extern void G__set_cpp_environmentG__Art();
 #include "TMemberInspector.h"
 #include "./analysisFlag.h"
 #include "./EN_CsI.h"
+#include "./EN_DSSD.h"
 #include "./ENFiberCal.h"
 #include "./EN_Neutron.h"
 #include "./ENOthers.h"
@@ -78,6 +79,7 @@ extern G__linked_taginfo G__G__ArtLN_maplEstringcOTObjArraymUcOlesslEstringgRcOa
 extern G__linked_taginfo G__G__ArtLN_vectorlETStringcOallocatorlETStringgRsPgR;
 extern G__linked_taginfo G__G__ArtLN_reverse_iteratorlEvectorlETStringcOallocatorlETStringgRsPgRcLcLiteratorgR;
 extern G__linked_taginfo G__G__ArtLN_EN_CsI;
+extern G__linked_taginfo G__G__ArtLN_EN_DSSD;
 extern G__linked_taginfo G__G__ArtLN_ENFiberCal;
 extern G__linked_taginfo G__G__ArtLN_EN_Neutron;
 extern G__linked_taginfo G__G__ArtLN_ENPlastic;

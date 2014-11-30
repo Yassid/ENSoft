@@ -38,6 +38,7 @@
 #include "ENFiberCal.h"
 #include "ENPlastic.h"
 #include "EN_CsI.h"
+#include "EN_DSSD.h"
 #include "EN_Neutron.h"
 //-----------------------------------------------------------
 TArtSortProc::TArtSortProc() :
@@ -74,6 +75,7 @@ TArtSortProc::TArtSortProc(const Char_t* name) :
   if (analist[3]==1) plastic = new ENPlastic();
   if (analist[4]==1) csi = new EN_CsI();
   if (analist[5]==1) neutron = new EN_Neutron();
+  if (analist[8]==1) dssd = new EN_DSSD();
 
   if (showrawdata == 1 ) RawDataMakeHist();
 
@@ -114,7 +116,7 @@ Bool_t TArtSortProc::BuildEvent(TGo4EventElement* dest)
    if (analist[3]==1) plastic->ENcode(rawdt,valnaok,4);
    if (analist[4]==1) csi->ENcode(rawdt,valnaok,4);
    if (analist[5]==1) neutron->ENcode(rawdt,valnaok,4);
-   
+   if (analist[8]==1) dssd->ENcode(rawdt,valnaok,4);
 
    fillHist1(hist1, nhst1,hist2, nhst2);
    // see comments in UnpackProc Yassid
