@@ -99,8 +99,9 @@ Bool_t TArtProc::BuildEvent(TGo4EventElement* target)
 		  else{
 		    if (segid1<maxFP && detid<maxDet && modid<maxMod && ch< maxCh ) out_evt->rawdata[segid1][detid][modid][ch]=val;
 	            else{
-			cout<<"TArtProc::BuildEvent-Error at "<<segid1<<"-"<<detid<<"-"<<modid<<"-"<<ch<<"  Stop now!!!"<<endl;
-	 		return kFALSE;
+			cout<<"TArtProc::BuildEvent-Warning  segid:  "<<segid1<<", detid: "<<detid<<", modid: "<<modid<<", ch: "<<ch<<"  Over array limit!!!"<<endl;
+			cout<<"TArtProc::BuildEvent-Limited  segid:  "<<maxFP<<", detid: "<<maxDet<<", modid: "<<maxMod<<", ch: "<<maxCh<<"  Over array limit!!!"<<endl;		 				
+			return kFALSE;
                     }
 		  }
               /*    out_evt->rawdatan[nch].filled = 1;
@@ -115,7 +116,7 @@ Bool_t TArtProc::BuildEvent(TGo4EventElement* target)
                   else out_evt->rawdatan[nch].hit = mhitt[ch];
                   nch++;
 */
-//	if (segid1==F3 && modid==20) cout<<cadid<<"-"<<segid1<<"-"<<detid<<"-"<<modid<<"-"<<ch<<":   "<<val<<"  edge:  "<<edge<<endl;
+//	if (segid1==F2 && modid==41) cout<<"TArtProc:  "<<"-"<<segid1<<"-"<<detid<<"-"<<modid<<"-"<<ch<<":   "<<val<<"  edge:  "<<edge<<endl;
        	}
 
      } // Segment loop
