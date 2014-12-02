@@ -77,7 +77,7 @@ Bool_t TArtProc::BuildEvent(TGo4EventElement* target)
 		  int ch = d->GetCh();
 		  int val = d->GetVal();
 		  int edge= 0;
-                  if (modid == V1190){
+                  if (modid == V1190 || modid==AMTTDC){
 		    edge=d->GetEdge(); 
                     if(mhitl[ch]<10){ //Leading
 		      if(edge==0){ 

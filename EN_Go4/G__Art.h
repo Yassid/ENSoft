@@ -35,6 +35,7 @@ extern void G__set_cpp_environmentG__Art();
 #include "./EN_CsI.h"
 #include "./EN_DSSD.h"
 #include "./ENFiberCal.h"
+#include "./EN_MWDC.h"
 #include "./EN_Neutron.h"
 #include "./ENOthers.h"
 #include "./ENPlastic.h"
@@ -81,6 +82,7 @@ extern G__linked_taginfo G__G__ArtLN_reverse_iteratorlEvectorlETStringcOallocato
 extern G__linked_taginfo G__G__ArtLN_EN_CsI;
 extern G__linked_taginfo G__G__ArtLN_EN_DSSD;
 extern G__linked_taginfo G__G__ArtLN_ENFiberCal;
+extern G__linked_taginfo G__G__ArtLN_EN_MWDC;
 extern G__linked_taginfo G__G__ArtLN_EN_Neutron;
 extern G__linked_taginfo G__G__ArtLN_ENPlastic;
 extern G__linked_taginfo G__G__ArtLN_EN_PPAC_Cal;
