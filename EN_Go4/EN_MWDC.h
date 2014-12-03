@@ -21,6 +21,7 @@ using namespace std;
 class EN_MWDC{
  private:
    int traw[3][8][17];
+   int tfirst[3][8];
    int hitwire[3][8][17];
    int nhits,nhitbc[3];
    double tcal[5][5];

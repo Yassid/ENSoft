@@ -29,13 +29,15 @@ void   EN_MWDC::ENcode(int raw[10][10][256], double val[10][10][256], int nval )
     val[analyser][1][3] = nhitbc[2];
     for (int i=1;i<3;i++){
       for (int j= 0;j<8;j++){
+         val[analyser][i+5][j+1] = tfirst[i][j];
          for (int k=0;k<16;k++){
+             val[analyser][i+3][j*16+k+1] = traw[i][j][k];
              if (hitwire[i][j][k] ==1){
                 val[analyser][i+1][j] = k;
  	     } 
          }
       }
-   }
+    }
 }
 // ***********************************************************************
 void   EN_MWDC::DataAssign(int raw[10][10][256]){
@@ -63,8 +65,12 @@ void   EN_MWDC::LookupHits(){
    nhits=0;nhitbc[1]=0;nhitbc[2]=0;
    for (int i=1;i<3;i++){
       for (int j= 0;j<8;j++){
+         tfirst[i][j]= 300000000;
          for (int k=0;k<16;k++){
 	     hitwire[i][j][k] = 0;
+ 	     if (traw[i][j][k]> 0 && traw[i][j][k]< tfirst[i][j]){
+		tfirst[i][j] = traw[i][j][k];
+	     }		
              if (traw[i][j][k]>0){
                 nhits++;
   	   	nhitbc[i]++;

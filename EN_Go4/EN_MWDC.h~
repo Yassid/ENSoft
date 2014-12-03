@@ -22,7 +22,7 @@ class EN_MWDC{
  private:
    int traw[3][8][17];
    int hitwire[3][8][17];
-   int nhits;
+   int nhits,nhitbc[3];
    double tcal[5][5];
    double ch2ns[5][5];
    double ch2qdc[5][5];
