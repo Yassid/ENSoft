@@ -34,7 +34,7 @@ class ENFiberCal{
    double posY[305];
    double weiY[305];
    double posX,posY1,width;
-   int DYQ[2];
+
    int flagprm;
    char* GetNextLine(char s ='#' );
    int Put2Array(char*, int*,int);

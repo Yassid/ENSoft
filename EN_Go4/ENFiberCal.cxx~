@@ -38,8 +38,6 @@ void ENFiberCal::ENcode(int raw[10][10][256], double val[10][10][256], int nval 
   val[analyser][1][6] = posY1;
   val[analyser][1][7] = nfire;
   val[analyser][1][8] = width;
-  val[analyser][2][1] = DYQ[0];
-  val[analyser][2][2] = DYQ[1]; 
 }
 // ***********************************************************************
 void  ENFiberCal::SetPosition(int start, int *rawin){
