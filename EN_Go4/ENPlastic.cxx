@@ -14,20 +14,23 @@ ENPlastic::ENPlastic(char* filename)
 ENPlastic::~ENPlastic(){}
 // ***********************************************************************
 void   ENPlastic::ENcode(int raw[10][10][256], double val[10][10][256], int nval ){
+   double tref;
    RF = raw[analyser][3][0];
    Ref= raw[analyser][4][0];
+   tref=Ref-20200;
+   F1PL_T = raw[analyser][8][0]-tref;F1PL_Q = raw[analyser][7][0];
 //    int F2PL_T,F2PL_Q;
-   F2DPL_LT = raw[analyser][1][1];F2DPL_LQ = raw[analyser][2][1];
-   F2DPL_RT = raw[analyser][1][0];F2DPL_RQ = raw[analyser][2][0];
+   F2DPL_LT = raw[analyser][1][0]-tref;F2DPL_LQ = raw[analyser][2][0];
+   F2DPL_RT = raw[analyser][1][1]-tref;F2DPL_RQ = raw[analyser][2][1];
    
-   F3PL_LT = raw[analyser][1][3];F3PL_LQ = raw[analyser][2][3];
-   F3PL_RT = raw[analyser][1][2];F3PL_RQ = raw[analyser][2][2];
+   F3PL_LT = raw[analyser][1][2]-tref;F3PL_LQ = raw[analyser][2][2];
+   F3PL_RT = raw[analyser][1][3]-tref;F3PL_RQ = raw[analyser][2][3];
    
-   F3DPL_LT = raw[analyser][1][5];F3DPL_LQ = raw[analyser][2][5];
-   F3DPL_RT = raw[analyser][1][4];F3DPL_RQ = raw[analyser][2][4];
+   F3DPL_LT = raw[analyser][1][4]-tref;F3DPL_LQ = raw[analyser][2][4];
+   F3DPL_RT = raw[analyser][1][5]-tref;F3DPL_RQ = raw[analyser][2][5];
 
-   val[analyser][1][1] = RF;
-   val[analyser][1][2] = Ref;
+   val[analyser][1][1] = RF-tref;
+   val[analyser][1][2] = Ref-tref;
    val[analyser][1][3] = F1PL_T;
    val[analyser][1][4] = F2PL_T;
    val[analyser][1][5] = F2DPL_LT;
@@ -39,7 +42,7 @@ void   ENPlastic::ENcode(int raw[10][10][256], double val[10][10][256], int nval
    
 //   val[analyser][1][1] = RF;
 //   val[analyser][1][2] = Ref;
-//   val[analyser][1][3] = F1PL_T;
+   val[analyser][2][3] = F1PL_Q;
    val[analyser][2][4] = F2PL_Q;
    val[analyser][2][3] = F2DPL_LQ;
    val[analyser][2][4] = F2DPL_RQ; 

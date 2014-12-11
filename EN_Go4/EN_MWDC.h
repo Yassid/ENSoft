@@ -25,6 +25,7 @@ class EN_MWDC{
    int hitwire[3][8][17],hitwiref[3][8];
    int nhits,nhitbc[3],nhitpl[3][9];
    float pospl[3][9][32],bpospl[3][9];
+   double Xmm[3][4],Ymm[3][4],Zmm[3][4],Ax,Ay;
    double tcal[5][5];
    double ch2ns[5][5];
    double ch2qdc[5][5];
@@ -38,6 +39,7 @@ class EN_MWDC{
    double posXns[5],posYns[5];
    double F2distance,F3distance;
    double aX_mrad,aY_mrad;
+   double X0,Y0;
    float ywei[3][8][1000];
 
    int flagprm;
@@ -62,14 +64,11 @@ class EN_MWDC{
   double GetY_Time(int no){return posYns[no];};
   double GetX_Position(int no){return posXmm[no];};
   double GetY_Position(int no){return posYmm[no];};
-  int GetLinearPar(double XY[][2], int npoint,double *hs);
-  double GetF2_aY_mrad();
-  double GetF3_aX_mrad();
-  double GetF3_aY_mrad();
-  double GetF2ExtrapolationX(double atZ);
-  double GetF2ExtrapolationY(double atZ);
-  double GetF3ExtrapolationX(double atZ);
-  double GetF3ExtrapolationY(double atZ);
+  double GetLinearPar(double XY[][2], int npoint,double *hs);
+  double Get_aX_mrad(){return Ax;}
+  double Get_aY_mrad(){return Ay;}
+  double GetExtrapolationX(double atZ);
+  double GetExtrapolationY(double atZ);
 
 };
 #endif

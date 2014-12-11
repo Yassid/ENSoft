@@ -43,7 +43,7 @@ TArtAnalysis::TArtAnalysis(int argc, char** argv) : TGo4Analysis(argc, argv)
    factory1->DefEventProcessor("Proc1","TArtProc");
    factory1->DefOutputEvent("UnpackEvent","TArtUnpackEvent");
    TGo4UserSourceParameter* source;
-   if (online ==0) source = new TGo4UserSourceParameter("/home/daq/Desktop/e428_run0086.ridf"); // FOR OFF LINE
+   if (online ==0) source = new TGo4UserSourceParameter("/home/daq/ridf/e428/e428_run0086.ridf"); // FOR OFF LINE
    else{
    //   TGo4UserSourceParameter*	source = new TGo4UserSourceParameter("172.16.213.212","",10080);	// For osatsu
    // TGo4UserSourceParameter*	source = new TGo4UserSourceParameter("neptunium","",10080);	// For nepu
@@ -67,8 +67,8 @@ TArtAnalysis::TArtAnalysis(int argc, char** argv) : TGo4Analysis(argc, argv)
    //  TGo4UserSourceParameter* source = new TGo4UserSourceParameter("test.ridf");
    step2->SetProcessEnabled(kTRUE);
    step2->SetErrorStopEnabled(kTRUE);
-/*
 
+   /*
    TGo4StepFactory*	factory3 = new TGo4StepFactory("Factory3");
    TGo4AnalysisStep*	step3	 = new TGo4AnalysisStep("Analysis", factory3, 0, 0);
    AddAnalysisStep(step3);
@@ -80,10 +80,11 @@ TArtAnalysis::TArtAnalysis(int argc, char** argv) : TGo4Analysis(argc, argv)
   
    step3->SetProcessEnabled(kTRUE);
    step3->SetErrorStopEnabled(kTRUE);
-  /*/ 
+   */
+
    SetAutoSave(kFALSE);
-
-
+   //SetAutoSave(kTRUE);
+   
    Print();			// print setup
 
    // Define custom passwords for analysis server

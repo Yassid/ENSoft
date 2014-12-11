@@ -18,8 +18,8 @@ void   EN_Neutron::ENcode(int raw[10][10][256], double val[10][10][256], int nva
    for (int i=0;i<8;i++){
 	qraw[i] = raw[analyser][1][i];
 	qraw[i+8] = raw[analyser][3][i];
-        traw[i] = raw[analyser][2][i];
-        traw[i+8] = raw[analyser][4][i];
+        traw[i] =   (raw[analyser][2][i]-raw[3][4][0]+20350)*0.1;//nsec
+        traw[i+8] = (raw[analyser][4][i]-raw[3][4][0]+20350)*0.1;//nsec
    }
    for (int i=0;i<16;i++){
 	val[analyser][1][i+1] = qraw[i];

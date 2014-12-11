@@ -15,16 +15,41 @@ EN_CsI::~EN_CsI(){}
 // ***********************************************************************
 void   EN_CsI::ENcode(int raw[10][10][256], double val[10][10][256], int nval ){
 
+  float calib[32]={
+		   1.0557,0.9191,1.0081,1.0068,1.1300,0.9785,0.9781,0.9521
+		   ,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00
+		   ,35.5,42.3,40.8,36.9,34.7,38.7,40.3,42.8
+		   ,35.5,37.7,30.1,24.3,34.4,29.0,32.0,27.0};//ST
+  /*
+  float calib[32]={1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00
+		   ,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00
+		   ,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00
+		   ,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00};//ST
+  */
    for (int i=0;i<16;i++){
 	qraw[i] = raw[analyser][1][i];
         traw[i] = raw[analyser][2][i];
    }
+
    for (int i=0;i<16;i++){
+     //val[analyser][1][i+1] = qraw[i];
+     val[analyser][1][i+1] = calib[i]*(qraw[i]-calib[i+16]);//ST
+     val[analyser][2][i+1] = traw[i];
+   }
+   
+   for (int i=0;i<4;i++){
 	val[analyser][1][i+1] = qraw[i];
         val[analyser][2][i+1] = traw[i];
    }
+   int CsIE[4];
+   for (int i=0;i<4;i++) CsIE[i]=-1;
+   for (int i=0;i<4;i++)
+     for (int j=0;j<4;j++)
+       if(val[analyser][1][4*i+j+1] > CsIE[i]){
+	 CsIE[i]=val[analyser][1][4*i+j+1];
+	 val[analyser][3][i+1] = CsIE[i];
+       }//ST
 }
-
 // ***********************************************************************
 int EN_CsI::ReadParameters(char* filename){
    

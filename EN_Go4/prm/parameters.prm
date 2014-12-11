@@ -1,7 +1,7 @@
 # mapping file
 ../map/mapping.map
 # Histogram
-../Histogram/standard_hist.hist
+../Histogram/histogram.hist
 
 
 

@@ -32,6 +32,7 @@ extern void G__set_cpp_environmentG__Art();
 #include "TObject.h"
 #include "TMemberInspector.h"
 #include "./analysisFlag.h"
+#include "./EN_Coin.h"
 #include "./EN_CsI.h"
 #include "./EN_DSSD.h"
 #include "./ENFiberCal.h"
@@ -79,6 +80,7 @@ extern G__linked_taginfo G__G__ArtLN_iteratorlEbidirectional_iterator_tagcOTObje
 extern G__linked_taginfo G__G__ArtLN_maplEstringcOTObjArraymUcOlesslEstringgRcOallocatorlEpairlEconstsPstringcOTObjArraymUgRsPgRsPgR;
 extern G__linked_taginfo G__G__ArtLN_vectorlETStringcOallocatorlETStringgRsPgR;
 extern G__linked_taginfo G__G__ArtLN_reverse_iteratorlEvectorlETStringcOallocatorlETStringgRsPgRcLcLiteratorgR;
+extern G__linked_taginfo G__G__ArtLN_EN_Coin;
 extern G__linked_taginfo G__G__ArtLN_EN_CsI;
 extern G__linked_taginfo G__G__ArtLN_EN_DSSD;
 extern G__linked_taginfo G__G__ArtLN_ENFiberCal;

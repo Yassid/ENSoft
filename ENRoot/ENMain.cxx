@@ -127,7 +127,7 @@ int readmapfile(char *filename,mapping* map, int& numch){
             map[numch].edge=  arr[8];
             if (arr[5]==1) sprintf(map[numch].name,"%s",detname);
             else sprintf(map[numch].name,"%s_%d",detname,j);
-//            printf("%d\t%d\t%d\t%d\t%d\t%d\t%d\t%s\n",map[numch].cad,map[numch].seg,map[numch].det,map[numch].mod,map[numch].ch,map[numch].hit,map[numch].edge,map[numch].name);
+ //           printf("%d\t%d\t%d\t%d\t%d\t%d\t%d\t%d\t%s\n",numch,map[numch].cad,map[numch].seg,map[numch].det,map[numch].mod,map[numch].ch,map[numch].hit,map[numch].edge,map[numch].name);
             numch +=1;
          }
         }else goto lerr;

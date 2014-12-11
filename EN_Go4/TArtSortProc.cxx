@@ -41,6 +41,7 @@
 #include "EN_DSSD.h"
 #include "EN_Neutron.h"
 #include "EN_MWDC.h"
+#include "EN_Coin.h"
 //-----------------------------------------------------------
 TArtSortProc::TArtSortProc() :
    TGo4EventProcessor()
@@ -76,6 +77,7 @@ TArtSortProc::TArtSortProc(const Char_t* name) :
   if (analist[3]==1) plastic = new ENPlastic();
   if (analist[4]==1) csi = new EN_CsI();
   if (analist[5]==1) neutron = new EN_Neutron();
+  if (analist[6]==1) coin = new EN_Coin();
   if (analist[7]==1) mwdc = new EN_MWDC();
   if (analist[8]==1) dssd = new EN_DSSD();
 
@@ -118,6 +120,7 @@ Bool_t TArtSortProc::BuildEvent(TGo4EventElement* dest)
    if (analist[3]==1) plastic->ENcode(rawdt,valnaok,4);
    if (analist[4]==1) csi->ENcode(rawdt,valnaok,4);
    if (analist[5]==1) neutron->ENcode(rawdt,valnaok,4);
+   if (analist[6]==1) coin->ENcode(rawdt,valnaok,4);
    if (analist[7]==1) mwdc->ENcode(rawdt,valnaok,4);
    if (analist[8]==1) dssd->ENcode(rawdt,valnaok,4);
 
@@ -176,6 +179,17 @@ Int_t TArtSortProc::fillHist1(hst1* histo, Int_t numch, hst2* histo2, Int_t numc
 		    if (histo2[i].num1==5 && histo2[i].num2==6) histo2[i].hHist2->Fill(ppac->GetF3ExtrapolationX(dz),ppac->GetF3ExtrapolationY(dz));
 		    if (histo2[i].num1==6 && histo2[i].num2==5) histo2[i].hHist2->Fill(ppac->GetF3ExtrapolationY(dz),ppac->GetF3ExtrapolationX(dz));
                   }	
+		}else if (analist[7]==1 && histo2[i].anal1==7 && histo2[i].seg1==10 &&
+				     histo2[i].anal2==7 && histo2[i].seg2==10){ 
+		  for (int j=0;j<100;j++){
+		    double dz = -500 + 2000.0*rand()/RAND_MAX;
+		    if (histo2[i].num1==1 && histo2[i].num2==2) histo2[i].hHist2->Fill(dz,mwdc->GetExtrapolationX(dz));
+		    if (histo2[i].num1==2 && histo2[i].num2==1) histo2[i].hHist2->Fill(mwdc->GetExtrapolationX(dz),dz);
+		    if (histo2[i].num1==1 && histo2[i].num2==3) histo2[i].hHist2->Fill(dz,mwdc->GetExtrapolationY(dz));
+		    if (histo2[i].num1==3 && histo2[i].num2==1) histo2[i].hHist2->Fill(mwdc->GetExtrapolationY(dz),dz);
+		    if (histo2[i].num1==2 && histo2[i].num2==3) histo2[i].hHist2->Fill(mwdc->GetExtrapolationX(dz),mwdc->GetExtrapolationY(dz));
+		    if (histo2[i].num1==3 && histo2[i].num2==2) histo2[i].hHist2->Fill(mwdc->GetExtrapolationY(dz),mwdc->GetExtrapolationX(dz));
+                  }	
 		}else histo2[i].hHist2->Fill(valnaok[histo2[i].anal1][histo2[i].seg1][histo2[i].num1],
  		 		             valnaok[histo2[i].anal2][histo2[i].seg2][histo2[i].num2]);
 
@@ -202,8 +216,19 @@ Int_t TArtSortProc::fillHist1(hst1* histo, Int_t numch, hst2* histo2, Int_t numc
 		    		   if (histo2[i].num1==5 && histo2[i].num2==6) histo2[i].hHist2->Fill(ppac->GetF3ExtrapolationX(dz),ppac->GetF3ExtrapolationY(dz));
 		    		   if (histo2[i].num1==6 && histo2[i].num2==5) histo2[i].hHist2->Fill(ppac->GetF3ExtrapolationY(dz),ppac->GetF3ExtrapolationX(dz));	
 			        }
-			    }else	 
-			    histo2[i].hHist2->Fill(valnaok[histo2[i].anal1][histo2[i].seg1][histo2[i].num1],
+			    }else if (analist[7]==1 && histo2[i].anal1==7 && histo2[i].seg1==10 &&
+				     histo2[i].anal2==7 && histo2[i].seg2==10){ 
+				  for (int j=0;j<100;j++){
+				    double dz = -500 + 2000.0*rand()/RAND_MAX;
+				    if (histo2[i].num1==1 && histo2[i].num2==2) histo2[i].hHist2->Fill(dz,mwdc->GetExtrapolationX(dz));
+		   		    if (histo2[i].num1==2 && histo2[i].num2==1) histo2[i].hHist2->Fill(mwdc->GetExtrapolationX(dz),dz);
+		   		    if (histo2[i].num1==1 && histo2[i].num2==3) histo2[i].hHist2->Fill(dz,mwdc->GetExtrapolationY(dz));
+		    		    if (histo2[i].num1==3 && histo2[i].num2==1) histo2[i].hHist2->Fill(mwdc->GetExtrapolationY(dz),dz);
+		    		    if (histo2[i].num1==2 && histo2[i].num2==3) histo2[i].hHist2->Fill(mwdc->GetExtrapolationX(dz),mwdc->GetExtrapolationY(dz));
+		    		    if (histo2[i].num1==3 && histo2[i].num2==2) histo2[i].hHist2->Fill(mwdc->GetExtrapolationY(dz),mwdc->GetExtrapolationX(dz));
+				  }
+                  	    }else 	 
+			            histo2[i].hHist2->Fill(valnaok[histo2[i].anal1][histo2[i].seg1][histo2[i].num1],
 							    valnaok[histo2[i].anal2][histo2[i].seg2][histo2[i].num2]);
  			    break;	
 			}  
@@ -237,11 +262,18 @@ Int_t TArtSortProc::RawDataFillHist(TArtSortEvent*){
 //*****************************************************************
 Int_t TArtSortProc::RawDataAssign(TArtUnpackEvent* inp_evt){
   for (Int_t i = 0;i<ExpNumDets;i++){
-      if ((ExpDetRaw[i].mod==V1190 || ExpDetRaw[i].mod==AMTTDC) && ExpDetRaw[i].edge==0) ExpDetRaw[i].val= inp_evt->v1190[ExpDetRaw[i].det][ExpDetRaw[i].ch][ExpDetRaw[i].hit] -0* V1190refval;
-      else if ((ExpDetRaw[i].mod==V1190 || ExpDetRaw[i].mod==AMTTDC) && ExpDetRaw[i].edge==1) ExpDetRaw[i].val= inp_evt->v1190[ExpDetRaw[i].det][ExpDetRaw[i].ch][ExpDetRaw[i].hit+10] -0* V1190refval;
-      else ExpDetRaw[i].val= inp_evt->rawdata[ExpDetRaw[i].seg][ExpDetRaw[i].det][ExpDetRaw[i].mod][ExpDetRaw[i].ch];
-
-      rawdt[ExpDetRaw[i].cad][ExpDetRaw[i].aid][ExpDetRaw[i].pos] = ExpDetRaw[i].val;
+    //if(abs(inp_evt->v1190[ExpDetRaw[i].det][121][0]-11800)<1000){//ST
+    //V1190refval=inp_evt->v1190[ExpDetRaw[i].det][121][0]-11800;//ST
+    //}else{
+    //V1190refval=0;
+    //}
+    if ((ExpDetRaw[i].mod==V1190 || ExpDetRaw[i].mod==AMTTDC) && ExpDetRaw[i].edge==0) ExpDetRaw[i].val= inp_evt->v1190[ExpDetRaw[i].det][ExpDetRaw[i].ch][ExpDetRaw[i].hit] -0* V1190refval;
+    else if ((ExpDetRaw[i].mod==V1190 || ExpDetRaw[i].mod==AMTTDC) && ExpDetRaw[i].edge==1) ExpDetRaw[i].val= inp_evt->v1190[ExpDetRaw[i].det][ExpDetRaw[i].ch][ExpDetRaw[i].hit+10] -0* V1190refval;
+    //if ((ExpDetRaw[i].mod==V1190 || ExpDetRaw[i].mod==AMTTDC) && ExpDetRaw[i].edge==0) ExpDetRaw[i].val= inp_evt->v1190[ExpDetRaw[i].det][ExpDetRaw[i].ch][ExpDetRaw[i].hit] -1* V1190refval;
+    //else if ((ExpDetRaw[i].mod==V1190 || ExpDetRaw[i].mod==AMTTDC) && ExpDetRaw[i].edge==1) ExpDetRaw[i].val= inp_evt->v1190[ExpDetRaw[i].det][ExpDetRaw[i].ch][ExpDetRaw[i].hit+10] -1* V1190refval;
+    else ExpDetRaw[i].val= inp_evt->rawdata[ExpDetRaw[i].seg][ExpDetRaw[i].det][ExpDetRaw[i].mod][ExpDetRaw[i].ch];
+    
+    rawdt[ExpDetRaw[i].cad][ExpDetRaw[i].aid][ExpDetRaw[i].pos] = ExpDetRaw[i].val;
   }
    return 1;
 }

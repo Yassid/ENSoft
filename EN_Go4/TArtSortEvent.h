@@ -90,16 +90,28 @@ class TArtSortEvent : public TGo4EventElement {
 
       Int_t PPAC_Trg;
 
+      /*
+      //Added for E428 by ST
+      Int_t ElossmaxXL;
+      Int_t ElossmaxYL;
+      Int_t ElossmaxXR;
+      Int_t ElossmaxYR;
+      Int_t ELl;
+      Int_t ERl;
+      Int_t ELh;
+      Int_t ERh;
+      */
+      
       //	    F3 Detectors for E372 experiment Yassid 19062014
-  Int_t F3VETO_L;
-  Int_t F3VETO_R;
-  Int_t F3VETO_L_T;
-  Int_t F3VETO_R_T;
-  Int_t F3NaI_H;
-  Int_t F3NaI_L;
-  Int_t F3MUSIC_E[8];
-  Int_t F3MUSIC_T[8];
-  Int_t F3MUSIC_dE;
+      Int_t F3VETO_L;
+      Int_t F3VETO_R;
+      Int_t F3VETO_L_T;
+      Int_t F3VETO_R_T;
+      Int_t F3NaI_H;
+      Int_t F3NaI_L;
+      Int_t F3MUSIC_E[8];
+      Int_t F3MUSIC_T[8];
+      Int_t F3MUSIC_dE;
        
 
    ClassDef(TArtSortEvent,1)

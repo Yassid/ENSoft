@@ -39,11 +39,13 @@ void ENFiberCal::ENcode(int raw[10][10][256], double val[10][10][256], int nval 
   val[analyser][1][7] = nfire;
   val[analyser][1][8] = width;
   val[analyser][2][1] = DYQ[0];
-  val[analyser][2][2] = DYQ[1]; 
+  val[analyser][2][2] = DYQ[1];
+  val[analyser][1][9] = width;
+  val[analyser][1][10] = width; 
 }
 // ***********************************************************************
 void  ENFiberCal::SetPosition(int start, int *rawin){
-  if (flagprm<0) printf("ENFiber:   Khong doc dc prm file\n");
+  //if (flagprm<0) printf("ENFiber:   Khong doc dc prm file\n");
   for (int i=0;i<128;i++){
      traw[i] = rawin[start+i];
   }
@@ -51,10 +53,10 @@ void  ENFiberCal::SetPosition(int start, int *rawin){
 }
 // ***********************************************************************
 void  ENFiberCal::SetPosition1(){
-  if (flagprm<0) printf("ENFiber:   Khong doc dc prm file\n");
+  //if (flagprm<0) printf("ENFiber:   Khong doc dc prm file\n");
   for (int i=0;i<128;i++){
-     tcal[i][0] = traw[i]*ch2ns[i];
-     tcal[i][1] = (trawt[i]-traw[i])*ch2ns[i]; 
+    tcal[i][0] = traw[i]*ch2ns[i];
+    tcal[i][1] = (trawt[i]-traw[i])*ch2ns[i]; 
   }
   for (int i=0;i<300;i++){
 	pos_fire[i] = -1;ch_L[i] = -1;ch_R[i]=-1;
@@ -609,12 +611,17 @@ void  ENFiberCal::SetPosition1(){
 	    width_R[i] = tcal[ch_R[i]][1];
 
             if (abs(posY[i]) < threshold_Y && tcal[ch_L[i]][1]>0 && tcal[ch_R[i]][1]>0){// && weiY[i]>weimax) {
+	      if (abs(weiY[i]-2*tcal[121][0]+16800) < 300) {
+		//if (abs(weiY[i]-2*tcal[121][0]+18100) < 500) {
+		//cout<<i<<":"<<tcal[121][0]<<":"<<weiY[i]<<":"<<
+		//weiY[i]-2*tcal[121][0]+16800<<endl;
                 posX = (pos_fire[i] - 150)*ns2mm[0] - offset[0];
 		posY1=posY[i]*ns2mm[1] - offset[1];
                 weimax=weiY[i];
    		width = weimax;
                 npos++;
   //              printf("F1  be  %d %f  %f  %f \n",npos,posX,posY1,weiY[i]);
+	    }//ST
 	    } 
         }
         nfire=npos;
@@ -623,7 +630,7 @@ void  ENFiberCal::SetPosition1(){
 }
 // ***********************************************************************
 void  ENFiberCal::SetPosition(){
-  if (flagprm<0) printf("ENFiber:   Khong doc dc prm file\n");
+  //if (flagprm<0) printf("ENFiber:   Khong doc dc prm file\n");
   for (int i=0;i<128;i++){
      tcal[i][0] = traw[i]*ch2ns[i];
      tcal[i][1] = (trawt[i]-traw[i])*ch2ns[i]; 

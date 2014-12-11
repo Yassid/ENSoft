@@ -77,7 +77,6 @@ TArtAnlProc::TArtAnlProc(const char* name) :
 //    	F2_UPPAC_XYT->GetYaxis()->SetTitle("Y Position (ns)");
 */
 
-
 		//*****************************Yassid N.B.: We move all histograms to E372 Go4 Folder 21062014 ***************************************//
 
         F2_UPPAC_XYmm = MakeTH2('I', "E372/F2PPAC/F2UPPAC_XY_mm", "F2UPPAC Postion Calibrated in mm", 1000, -160., 160., 1000, -160., 160.);      	
@@ -248,10 +247,11 @@ Bool_t TArtAnlProc::BuildEvent(TGo4EventElement* dest)
 
  //  Int_t cnt(0);
    
+   //cout<<"TEST:"<<inp_evt->ELl<<":"<<inp_evt->ElossmaxXL<<endl;
 
 ////////////////// PPACs /////////////////////
 // channels to ns
-   cout<<"AnalProc   "<<inp_evt-> F2UPPAC_R<<endl;
+   //cout<<"AnalProc   "<<inp_evt-> F2UPPAC_R<<endl;
    out_evt-> F2UPPAC_Xns = (fF2Param->fF2UPPAC_ch2ns_XL*inp_evt-> F2UPPAC_L) - (fF2Param->fF2UPPAC_ch2ns_XR*inp_evt-> F2UPPAC_R );   
    out_evt-> F2UPPAC_Yns = (fF2Param->fF2UPPAC_ch2ns_YD*inp_evt-> F2UPPAC_D) - (fF2Param->fF2UPPAC_ch2ns_YU*inp_evt-> F2UPPAC_U );
 

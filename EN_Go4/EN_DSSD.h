@@ -23,7 +23,7 @@ class EN_DSSD{
 
    double ch2mev[4][128];
    double offset[4][128];
-   double posXL,posYL,posXR,posYR;
+   int posXL,posYL,posXR,posYR;
    double El_XL,El_YL,El_XR,El_YR;
    int qcal[4][128];
    int XLqraw[128],YLqraw[128],XRqraw[128],YRqraw[128];

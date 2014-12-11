@@ -29,6 +29,7 @@ class EN_CsI;
 class EN_DSSD;
 class EN_MWDC;
 class EN_Neutron;
+class EN_Coin;
 
 //class TArtF2Param;
 //class TArtF3Param;
@@ -51,7 +52,7 @@ class TArtSortProc : public TGo4EventProcessor {
       EN_DSSD		*dssd;	
       EN_Neutron	*neutron;
       EN_MWDC		*mwdc;	
-
+	EN_Coin		*coin;
       TGo4PolyCond      *gate[20];
       TH1 *hExpDet[5000];
  private:

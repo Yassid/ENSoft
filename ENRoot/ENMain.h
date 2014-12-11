@@ -22,7 +22,7 @@
     char name[20];
     float val;
   };
-  mapping ENraw[1000];
+  mapping ENraw[5000];
   int numch,f1fiberFlag,f2ppacFlag,f3ppacFlag;
   int f1fiber_ch,f2ppac_ch,f3ppac_ch;
   ifstream fi;  

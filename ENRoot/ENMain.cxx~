@@ -114,7 +114,7 @@ int readmapfile(char *filename,mapping* map, int& numch){
        if (buff !=NULL){
         if (Put2Array(buff,arr,9)==0){
          detname = buff;
-          if (arr[0] == 1) {f1fiberFlag=1;f1fiber_ch=numch;}
+          if (arr[0] == 1 && arr[1]==1) {f1fiberFlag=1;f1fiber_ch=numch;}
           if (arr[0] == 2 && arr[1]==1) {f2ppacFlag=1;f2ppac_ch=numch;} 
           if (arr[0] == 2 && arr[1]==2) {f3ppacFlag=1;f3ppac_ch=numch;}
          for (int j=0;j<arr[5];j++){
@@ -127,7 +127,7 @@ int readmapfile(char *filename,mapping* map, int& numch){
             map[numch].edge=  arr[8];
             if (arr[5]==1) sprintf(map[numch].name,"%s",detname);
             else sprintf(map[numch].name,"%s_%d",detname,j);
-//            printf("%d\t%d\t%d\t%d\t%d\t%d\t%d\t%s\n",map[numch].cad,map[numch].seg,map[numch].det,map[numch].mod,map[numch].ch,map[numch].hit,map[numch].edge,map[numch].name);
+            printf("%d\t%d\t%d\t%d\t%d\t%d\t%d\t%d\t%s\n",numch,map[numch].cad,map[numch].seg,map[numch].det,map[numch].mod,map[numch].ch,map[numch].hit,map[numch].edge,map[numch].name);
             numch +=1;
          }
         }else goto lerr;

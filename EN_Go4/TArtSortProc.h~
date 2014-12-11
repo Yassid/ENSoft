@@ -27,6 +27,7 @@ class ENFiberCal;
 class ENPlastic;
 class EN_CsI;
 class EN_DSSD;
+class EN_MWDC;
 class EN_Neutron;
 
 //class TArtF2Param;
@@ -48,7 +49,8 @@ class TArtSortProc : public TGo4EventProcessor {
       ENPlastic		*plastic;
       EN_CsI		*csi;
       EN_DSSD		*dssd;	
-      EN_Neutron	*neutron;	
+      EN_Neutron	*neutron;
+      EN_MWDC		*mwdc;	
 
       TGo4PolyCond      *gate[20];
       TH1 *hExpDet[5000];

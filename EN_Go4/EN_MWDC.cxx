@@ -46,15 +46,24 @@ void   EN_MWDC::ENcode(int raw[10][10][256], double val[10][10][256], int nval )
          val[analyser][i+5][j+1] = tfirst[i][j];
          if (hitwiref[i][j]>0) val[analyser][i+7][j+1] = hitwiref[i][j];
          for (int k=0;k<16;k++){
-             val[analyser][i+3][j*16+k+1] = traw[i][j][k];
+    //         val[analyser][i+3][j*16+k+1] = traw[i][j][k];
              if (bpospl[i][j]>-10000) val[analyser][i+3][j] = bpospl[i][j];
              if (hitwire[i][j][k] ==1){
                 val[analyser][i+1][j] = k;
-                val[analyser][i+3][j] = pospl[i][j][k];
+      //          val[analyser][i+3][j] = pospl[i][j][k];
  	     } 
          }
       }
     }
+    for (int i=1;i<3;i++)
+      for (int j= 0;j<4;j++){
+         val[analyser][i+3][j+1] = Xmm[i][j];
+         val[analyser][i+3][j+5] = Ymm[i][j];
+    }
+    val[analyser][4][0] = Ax;
+    val[analyser][5][0] = Ay;
+    val[analyser][4][1] = GetExtrapolationX(1378.5);
+    val[analyser][5][1] = GetExtrapolationY(1378.5);
 }
 // ***********************************************************************
 void   EN_MWDC::DataAssign(int raw[10][10][256]){
@@ -89,15 +98,12 @@ void   EN_MWDC::LookupHits(){
          hitwiref[i][j]=-1;
          for (int k=0;k<16;k++){
 	     hitwire[i][j][k] = 0;
- 	     if (traw[i][j][k]> 10 && traw[i][j][k]< tfirst[i][j]){
-		tfirst[i][j] = traw[i][j][k];
-                hitwiref[i][j]=k;
-	     }	
-//printf("sdsds  %f \n",ywei[i][j][traw[i][j][k]]);	
              if (ywei[i][j][traw[i][j][k]]>0){
+                tfirst[i][j] = traw[i][j][k];
       		hitwire[i][j][k] = 1;
-                pospl[i][j][2*nhitpl[i][j]]    = - 2.5*(j%2) + (k-7)*5 - 1.25 + ywei[i][j][traw[i][j][k]];
-                pospl[i][j][2*nhitpl[i][j]+1]  = - 2.5*(j%2) + (k-7)*5 - 1.25 - ywei[i][j][traw[i][j][k]];
+                pospl[i][j][nhitpl[i][j]]  = (- 2.5*(j%2-1) + (k-7)*5.0 - 1.25) + 1*ywei[i][j][traw[i][j][k]];
+		nhitpl[i][j]++;
+		pospl[i][j][nhitpl[i][j]]  = (- 2.5*(j%2-1) + (k-7)*5.0 - 1.25) - 1*ywei[i][j][traw[i][j][k]];
         //        printf("Pospl %d  %d  %d  %f  %f\n",j%2,j,k,pospl[i][j][k],pospl[i][j][k+16]);
         //        tfirst[i][j] = traw[i][j][k];
                 nhits++;
@@ -107,48 +113,97 @@ void   EN_MWDC::LookupHits(){
          }
       }
    }
-   double XZ[2][8]; 
-   if (nhitpl[1][0]>0) for (int i10=0;i10<nhitpl[1][0];i10++)
-     if (nhitpl[1][1]>0) for (int i11=0;i11<nhitpl[1][1];i11++)
-       if (nhitpl[1][2]>0) for (int i12=0;i12<nhitpl[1][2];i12++)
-         if (nhitpl[1][3]>0) for (int i13=0;i13<nhitpl[1][3];i13++)
-            if (nhitpl[2][0]>0) for (int i20=0;i20<nhitpl[2][0];i20++)
-     	       if (nhitpl[2][1]>0) for (int i21=0;i21<nhitpl[2][1];i21++)
-       		 if (nhitpl[2][2]>0) for (int i22=0;i22<nhitpl[2][2];i22++)
-         	   if (nhitpl[2][3]>0) for (int i23=0;i23<nhitpl[2][3];i23++){
-			 if (nhitpl[1][0]>0) {XZ[n][0] = pospl[1][0][i10]; n++}
-			 if (nhitpl[1][1]>0) {XZ[n][0] = pospl[1][0][i11]; n++}
-			 if (nhitpl[1][2]>0) {XZ[n][0] = pospl[1][0][i12]; n++}
-			 if (nhitpl[1][3]>0) {XZ[n][0] = pospl[1][0][i13]; n++}
-                         if (nhitpl[2][0]>0) {XZ[n][0] = pospl[1][0][i20]; n++}
-			 if (nhitpl[2][1]>0) {XZ[n][0] = pospl[1][0][i21]; n++}
-			 if (nhitpl[2][2]>0) {XZ[n][0] = pospl[1][0][i22]; n++}
-			 if (nhitpl[2][3]>0) {XZ[n][0] = pospl[1][0][i23]; n++}
-		   }
-	  
-   for (int i=1;i<3;i++){
-      for (int j= 0;j<4;j++){
-         float dmin = 100000;
-         for (int k=0;k<32;k++){
-	     if (pospl[i][2*j][k]>-10000){
-       //         printf("dmin\t%d\t%d\t%d\t",i,j,k); 
-        //        printf("%d %d %d %f  %f  %f  %f\n",i,j,k,pospl[i][2*j][k],pospl[i][2*j+1][k-1],pospl[i][2*j+1][k],pospl[i][2*j+1][k+1]);
-                for (int k1=0;k1<32;k1++){
-                   if (pospl[i][2*j+1][k1]>-10000){
-         //          printf("%d\t%f\t",k1,abs(pospl[i][2*j][k]-pospl[i][2*j+1][k1]));
-                   if (abs(pospl[i][2*j][k]-pospl[i][2*j+1][k1])<dmin){
-          
-                     dmin =  abs(pospl[i][2*j][k]-pospl[i][2*j+1][k1]);
-                     bpospl[i][2*j] = pospl[i][2*j][k];
-     		     bpospl[i][2*j+1] = pospl[i][2*j+1][k1];
-	}	   }
-                }
-           //     printf("\t%f   \n",dmin); 
- 	     }
- 
-         }
+   double XZ[8][2],hs[2],dlmax,dl; 
+   
+   for (int i=0;i<4;i++)
+      for (int j=0;j<4;j++){
+         Xmm[i][j] = -1000;
+	 Ymm[i][j] = -1000;
+
+         if (nhitpl[i][j]==0) nhitpl[i][j]=1;
+	 if (nhitpl[i][j+4]==0) nhitpl[i][j+4]=1;
       }
-   }
+   Ax=1000;Ay=1000;
+   int n=0;
+   dlmax = 1E39;
+//    printf(" Start for one evt  %d\n" ,nhits);
+   for (int i10=0;i10<nhitpl[1][0];i10++)
+     for (int i11=0;i11<nhitpl[1][1];i11++)
+       for (int i12=0;i12<nhitpl[1][2];i12++)
+         for (int i13=0;i13<nhitpl[1][3];i13++)
+            for (int i20=0;i20<nhitpl[2][0];i20++)
+     	       for (int i21=0;i21<nhitpl[2][1];i21++)
+       		 for (int i22=0;i22<nhitpl[2][2];i22++)
+         	   for (int i23=0;i23<nhitpl[2][3];i23++){
+			 n=0;
+			 if (nhitpl[1][0]>1) {XZ[n][0] =   0.0; XZ[n][1] = pospl[1][0][i10]; n++;}
+			 if (nhitpl[1][1]>1) {XZ[n][0] =   4.8; XZ[n][1] = pospl[1][1][i11]; n++;}
+			 if (nhitpl[1][2]>1) {XZ[n][0] =  19.2; XZ[n][1] = pospl[1][2][i12]; n++;}
+			 if (nhitpl[1][3]>1) {XZ[n][0] =  24.0; XZ[n][1] = pospl[1][3][i13]; n++;}
+                         if (nhitpl[2][0]>1) {XZ[n][0] = 998.5; XZ[n][1] = pospl[2][0][i20]; n++;}
+			 if (nhitpl[2][1]>1) {XZ[n][0] =1003.3; XZ[n][1] = pospl[2][1][i21]; n++;}
+			 if (nhitpl[2][2]>1) {XZ[n][0] =1017.7; XZ[n][1] = pospl[2][2][i22]; n++;}
+			 if (nhitpl[2][3]>1) {XZ[n][0] =1022.5; XZ[n][1] = pospl[2][3][i23]; n++;}
+			 dl = GetLinearPar(XZ,n,hs);
+			 if (dl<dlmax){
+			   dlmax=dl;//printf("Min \t%f \t%f \t%f\n",dl,hs[0],hs[1]);
+			 //   for (int i=0;i<n;i++)
+         		 //      printf("\t%d\t%f \t%f\n",i, XZ[i][0],XZ[i][1]);
+                           Ax = hs[0];X0=hs[1];
+ 			   n=0;	
+                           if (nhitpl[1][0]>1) {Xmm[1][0] = XZ[n][1];Zmm[1][0] = XZ[n][0]; n++;}
+ 			   if (nhitpl[1][1]>1) {Xmm[1][1] = XZ[n][1];Zmm[1][1] = XZ[n][0]; n++;}
+			   if (nhitpl[1][2]>1) {Xmm[1][2] = XZ[n][1];Zmm[1][2] = XZ[n][0]; n++;}
+			   if (nhitpl[1][3]>1) {Xmm[1][3] = XZ[n][1];Zmm[1][3] = XZ[n][0]; n++;}
+                           if (nhitpl[2][0]>1) {Xmm[2][0] = XZ[n][1];Zmm[2][0] = XZ[n][0]; n++;}
+			   if (nhitpl[2][1]>1) {Xmm[2][1] = XZ[n][1];Zmm[2][1] = XZ[n][0]; n++;}
+			   if (nhitpl[2][2]>1) {Xmm[2][2] = XZ[n][1];Zmm[2][2] = XZ[n][0]; n++;}
+			   if (nhitpl[2][3]>1) {Xmm[2][3] = XZ[n][1];Zmm[2][3] = XZ[n][0]; n++;}
+   			  
+			}
+		   }
+   //    for (int i=0;i<n;i++)
+   //    		       printf("\t%d\t%f \t%f\n",i, XZ[i][0],XZ[i][1]);
+   dlmax = 1E39;
+ //  printf(" Start for one evt Y  %d\n" ,nhits);
+   for (int i10=0;i10<nhitpl[1][4];i10++)
+     for (int i11=0;i11<nhitpl[1][5];i11++)
+       for (int i12=0;i12<nhitpl[1][6];i12++)
+         for (int i13=0;i13<nhitpl[1][7];i13++)
+            for (int i20=0;i20<nhitpl[2][4];i20++)
+     	       for (int i21=0;i21<nhitpl[2][5];i21++)
+       		 for (int i22=0;i22<nhitpl[2][6];i22++)
+         	   for (int i23=0;i23<nhitpl[2][7];i23++){
+			 n=0;
+			 if (nhitpl[1][4]>1) {XZ[n][0] =   0.0; XZ[n][1] = pospl[1][4][i10]; n++;}
+			 if (nhitpl[1][5]>1) {XZ[n][0] =   4.8; XZ[n][1] = pospl[1][5][i11]; n++;}
+			 if (nhitpl[1][6]>1) {XZ[n][0] =  19.2; XZ[n][1] = pospl[1][6][i12]; n++;}
+			 if (nhitpl[1][7]>1) {XZ[n][0] =  24.0; XZ[n][1] = pospl[1][7][i13]; n++;}
+                         if (nhitpl[2][4]>1) {XZ[n][0] = 998.5; XZ[n][1] = pospl[2][4][i20]; n++;}
+			 if (nhitpl[2][5]>1) {XZ[n][0] =1003.3; XZ[n][1] = pospl[2][5][i21]; n++;}
+			 if (nhitpl[2][6]>1) {XZ[n][0] =1017.7; XZ[n][1] = pospl[2][6][i22]; n++;}
+			 if (nhitpl[2][7]>1) {XZ[n][0] =1022.5; XZ[n][1] = pospl[2][7][i23]; n++;}
+			 dl = GetLinearPar(XZ,n,hs);
+			 if (dl<dlmax){
+                         
+			   dlmax=dl;//printf("Min \t%f \t%f \t%f\n",dl,hs[0],hs[1]);
+			 //   for (int i=0;i<n;i++)
+         		     //  printf("\t%d\t%f \t%f\n",i, XZ[i][0],XZ[i][1]);
+			   Ay=hs[0];Y0=hs[1];
+			   n=0;
+                           if (nhitpl[1][4]>1) {Ymm[1][0] = XZ[n][1];Zmm[1][0] = XZ[n][1]; n++;}
+ 			   if (nhitpl[1][5]>1) {Ymm[1][1] = XZ[n][1];Zmm[1][1] = XZ[n][1]; n++;}
+			   if (nhitpl[1][6]>1) {Ymm[1][2] = XZ[n][1];Zmm[1][2] = XZ[n][1]; n++;}
+			   if (nhitpl[1][7]>1) {Ymm[1][3] = XZ[n][1];Zmm[1][3] = XZ[n][1]; n++;}
+                           if (nhitpl[2][4]>1) {Ymm[2][0] = XZ[n][1];Zmm[2][0] = XZ[n][1]; n++;}
+			   if (nhitpl[2][5]>1) {Ymm[2][1] = XZ[n][1];Zmm[2][1] = XZ[n][1]; n++;}
+			   if (nhitpl[2][6]>1) {Ymm[2][2] = XZ[n][1];Zmm[2][2] = XZ[n][1]; n++;}
+			   if (nhitpl[2][7]>1) {Ymm[2][3] = XZ[n][1];Zmm[2][3] = XZ[n][1]; n++;}
+   			  
+			}
+		   }	  
+
+   return ;
 }
 // ***********************************************************************
 void   EN_MWDC::SetPosition(){
@@ -212,16 +267,16 @@ void   EN_MWDC::SetPosition(){
    }
 }
 // ***********************************************************************
-int EN_MWDC::GetLinearPar(double XY[][2], int npoint,double *hs){
+double EN_MWDC::GetLinearPar(double XY[][2], int npoint,double *hs){
    double A[2][2],A1[2][2],B[2],detA;
    for (int i=0;i<2;i++){
       B[i] = 0;
       for (int j=0;j<2;j++){
          A[i][j] = 0;
    } }
-        printf("\tX      \tY    \n");
+  //      printf("\tX      \tY    \n");
          for (int i =0;i<npoint;i++){
-            printf("\t%f\t%f\n",XY[i][0],XY[i][1]);
+  //          printf("%d\t%f  \t%f\n",i,XY[i][0],XY[i][1]);
             A[0][0] += XY[i][0]*XY[i][0];
             A[0][1] += XY[i][0];
             A[1][0] += XY[i][0];
@@ -230,76 +285,36 @@ int EN_MWDC::GetLinearPar(double XY[][2], int npoint,double *hs){
             B[1] += XY[i][1];
          } 
       detA = A[0][0]*A[1][1] - A[0][1]*A[0][1];
-      printf("A : %f    %f\n",A[0][0],A[0][1]);
-      printf("A : %f    %f\n",A[0][1],A[1][1]);
-      printf("A : %f    %f\n",B[0],B[1]);
-      printf("detA :   %f\n",detA);
+//      printf("A : %f    %f\n",A[0][0],A[0][1]);
+//      printf("A : %f    %f\n",A[0][1],A[1][1]);
+//      printf("A : %f    %f\n",B[0],B[1]);
+//      printf("detA :   %f\n",detA);
    if (detA==0) return -1;
       A1[0][0] = A[1][1]/detA; A1[0][1] = -A[1][0]/detA;
       A1[1][1] = A[0][0]/detA; A1[1][0] = -A[0][1]/detA;
-     printf("A : %f    %f\n",A1[0][0],A1[0][1]);
-      printf("A : %f    %f\n",A1[0][1],A1[1][1]);
+//     printf("A : %f    %f\n",A1[0][0],A1[0][1]);
+//      printf("A : %f    %f\n",A1[0][1],A1[1][1]);
       hs[0] = A1[0][0]*B[0] + A1[0][1]*B[1];
       hs[1] = A1[1][0]*B[0] + A1[1][1]*B[1];
-      printf("He so : %f    %f\n",hs[0],hs[1]);
+  //    printf("He so : %f    %f\n",hs[0],hs[1]);
       detA=0;
       for (int i =0;i<npoint;i++) detA+=pow(XY[i][1] - hs[0]*XY[i][0]-hs[1],2);
-      printf("bpdl :   %f\n",detA);
-   return 0;
+ //     printf("bpdl :   %f\n",detA);
+   return detA;
 }
 // ***********************************************************************
-double EN_MWDC::GetF2_aY_mrad(){
+double EN_MWDC::GetExtrapolationX(double atZ){
    double exX;
-   if (abs(posYmm[1])<50 && abs(posYmm[2])<50)
-      exX =  atan2(posYmm[2] - posYmm[1],F2distance);
-   else exX = -10;
-   return exX*1000;
-}
-// ***********************************************************************
-double EN_MWDC::GetF3_aX_mrad(){
-  double exX;
-   if (abs(posXmm[3])<50 && abs(posXmm[4])<50)
-      exX =  atan2(posXmm[4] - posXmm[3],F3distance);
-   else exX = -10;
-   return exX*1000;
-}
-// ***********************************************************************
-double EN_MWDC::GetF3_aY_mrad(){
-   double exX;
-   if (abs(posYmm[3])<50 && abs(posYmm[4])<50)
-      exX =  atan2(posYmm[4] - posYmm[3],F3distance);
-   else exX = -10;
-   return exX*1000;
-}
-// ***********************************************************************
-double EN_MWDC::GetF2ExtrapolationX(double atZ){
-   double exX;
-   if (abs(posXmm[1])<50 && abs(posXmm[2])<50)
-      exX =  posXmm[1] + (posXmm[2] - posXmm[1])*atZ/F2distance;
+   if (Ax!=1000 && Xmm[1][0]!=-1000)
+      exX =  Ax*atZ + X0;
    else exX = -1000;
    return exX;
 }
 // ***********************************************************************
-double EN_MWDC::GetF2ExtrapolationY(double atZ){
+double EN_MWDC::GetExtrapolationY(double atZ){
   double exX;
-   if (abs(posYmm[1])<50 && abs(posYmm[2])<50)
-      exX =  posYmm[1] + (posYmm[2] - posYmm[1])*atZ/F2distance;
-   else exX = -1000;
-   return exX;
-}
-// ***********************************************************************
-double EN_MWDC::GetF3ExtrapolationX(double atZ){
-  double exX;
-   if (abs(posXmm[3])<50 && abs(posXmm[4])<50)
-      exX =  posXmm[3] + (posXmm[4] - posXmm[3])*atZ/F3distance;
-   else exX = -1000;
-   return exX;
-}
-// ***********************************************************************
-double EN_MWDC::GetF3ExtrapolationY(double atZ){
-   double exX;
-   if (abs(posYmm[3])<50 && abs(posYmm[4])<50)
-      exX =  posYmm[3] + (posYmm[4] - posYmm[3])*atZ/F3distance;
+   if (Ay!=1000 && Ymm[1][0]!=-1000)
+      exX =  Ay*(atZ+10) + Y0;
    else exX = -1000;
    return exX;
 }
