@@ -1,0 +1,27 @@
+# *************************************************************************************************************#
+#                                                         Created by Tran Dinh Trong on Nov, 2014              #
+#   +  For convert raw data from EN Course experiment to ROOT or TXT file                                      #
+#   +  SegID, DetID, ModID bellow follow Focal, Detector, Module show on Web raw data monitor                  #
+#   +  NumCh: Number of channels of this detector if put continuously from Start_ch-->(count from 0)           #
+#   +  HitPos and Edge use for TDC to read at hit(HitPos), and Leading(Edge=0) or Trailing(Edge=1) like V1190, #
+#      other modules set them to 0.                                                                            #
+#   +  Name: will be used for column name(TXT) or  Branch name(ROOT), if NumCh>1 auto add the number _i.       #
+#                                                                                                              #
+# *************************************************************************************************************#
+#
+# cad 	id   Focal   DetID  	ModID   NumCh	StaCh	HitPos	Edge	Name
+  1  	1	1   	52  	24  	128  	0  	0	0	rF1FilberLead
+  1  	2	1   	52  	24  	128  	0  	0	1	rF1FilberTrail
+  2  	1	2   	7  	24  	10  	0  	0	0	rF2PPAC
+  3	1	2   	7  	24  	6  	58  	0	0	rPlasticT
+  3	2	2   	2  	21  	6  	0  	0	0	rPlasticQ
+  3  	3	2   	7  	24  	1  	11  	0	0	rRF
+  3  	4	2   	7  	24  	1  	10  	0	0	rRef
+  4  	1	2   	26  	32  	16  	0  	0	0	rCsIQ
+  4  	2	2   	7  	24  	16  	16  	0	0	rCsIT
+  9  	5	2   	3  	21  	1  	0  	0	0	rRF_V775
+  5  	1	2   	2  	21  	8  	8  	0	0	rStackQ
+  5  	2	2   	7  	24  	8  	32  	0	0	rStackT
+  5  	3	2   	15  	21  	8  	8  	0	0	rLiqQ
+  5  	4	2   	7  	24  	4  	40  	0	0	rLiqT
+

@@ -1,0 +1,8 @@
+# Map: seg  det  mod  
+1  52  24
+# Threshold of TDC and maximum diffrent time
+100  1000
+# Calib  ns2mm
+0.5   1
+# Offset X Y (mm)
+0   0

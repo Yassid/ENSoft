@@ -104,7 +104,7 @@ void   EN_MWDC::LookupHits(){
                 pospl[i][j][nhitpl[i][j]]  = (- 2.5*(j%2-1) + (k-7)*5.0 - 1.25) + 1*ywei[i][j][traw[i][j][k]];
 		nhitpl[i][j]++;
 		pospl[i][j][nhitpl[i][j]]  = (- 2.5*(j%2-1) + (k-7)*5.0 - 1.25) - 1*ywei[i][j][traw[i][j][k]];
-        //        printf("Pospl %d  %d  %d  %f  %f\n",j%2,j,k,pospl[i][j][k],pospl[i][j][k+16]);
+		//        printf("Pospl %d  %d  %d  %f  %f\n",j%2,j,k,pospl[i][j][k],pospl[i][j][k+16]);
         //        tfirst[i][j] = traw[i][j][k];
                 nhits++;
   	   	nhitbc[i]++;
@@ -123,10 +123,12 @@ void   EN_MWDC::LookupHits(){
          if (nhitpl[i][j]==0) nhitpl[i][j]=1;
 	 if (nhitpl[i][j+4]==0) nhitpl[i][j+4]=1;
       }
-   Ax=1000;Ay=1000;
-   int n=0;
+   Ax=-1000;Ay=-1000;
+   X0=-1000;Y0=-1000;
+   int n,n1;
    dlmax = 1E39;
-//    printf(" Start for one evt  %d\n" ,nhits);
+   if (nhits<3) goto forEnd;
+   //    printf(" Start for one evt  %d\n" ,nhits);
    for (int i10=0;i10<nhitpl[1][0];i10++)
      for (int i11=0;i11<nhitpl[1][1];i11++)
        for (int i12=0;i12<nhitpl[1][2];i12++)
@@ -140,10 +142,12 @@ void   EN_MWDC::LookupHits(){
 			 if (nhitpl[1][1]>1) {XZ[n][0] =   4.8; XZ[n][1] = pospl[1][1][i11]; n++;}
 			 if (nhitpl[1][2]>1) {XZ[n][0] =  19.2; XZ[n][1] = pospl[1][2][i12]; n++;}
 			 if (nhitpl[1][3]>1) {XZ[n][0] =  24.0; XZ[n][1] = pospl[1][3][i13]; n++;}
+			 if (n==0) goto forY;n1=n;
                          if (nhitpl[2][0]>1) {XZ[n][0] = 998.5; XZ[n][1] = pospl[2][0][i20]; n++;}
 			 if (nhitpl[2][1]>1) {XZ[n][0] =1003.3; XZ[n][1] = pospl[2][1][i21]; n++;}
 			 if (nhitpl[2][2]>1) {XZ[n][0] =1017.7; XZ[n][1] = pospl[2][2][i22]; n++;}
 			 if (nhitpl[2][3]>1) {XZ[n][0] =1022.5; XZ[n][1] = pospl[2][3][i23]; n++;}
+			 if (n<n1) goto forY;
 			 dl = GetLinearPar(XZ,n,hs);
 			 if (dl<dlmax){
 			   dlmax=dl;//printf("Min \t%f \t%f \t%f\n",dl,hs[0],hs[1]);
@@ -164,7 +168,7 @@ void   EN_MWDC::LookupHits(){
 		   }
    //    for (int i=0;i<n;i++)
    //    		       printf("\t%d\t%f \t%f\n",i, XZ[i][0],XZ[i][1]);
-   dlmax = 1E39;
+ forY:   dlmax = 1E39;
  //  printf(" Start for one evt Y  %d\n" ,nhits);
    for (int i10=0;i10<nhitpl[1][4];i10++)
      for (int i11=0;i11<nhitpl[1][5];i11++)
@@ -179,10 +183,12 @@ void   EN_MWDC::LookupHits(){
 			 if (nhitpl[1][5]>1) {XZ[n][0] =   4.8; XZ[n][1] = pospl[1][5][i11]; n++;}
 			 if (nhitpl[1][6]>1) {XZ[n][0] =  19.2; XZ[n][1] = pospl[1][6][i12]; n++;}
 			 if (nhitpl[1][7]>1) {XZ[n][0] =  24.0; XZ[n][1] = pospl[1][7][i13]; n++;}
+			 if (n==0) goto forEnd;n1=n;
                          if (nhitpl[2][4]>1) {XZ[n][0] = 998.5; XZ[n][1] = pospl[2][4][i20]; n++;}
 			 if (nhitpl[2][5]>1) {XZ[n][0] =1003.3; XZ[n][1] = pospl[2][5][i21]; n++;}
 			 if (nhitpl[2][6]>1) {XZ[n][0] =1017.7; XZ[n][1] = pospl[2][6][i22]; n++;}
 			 if (nhitpl[2][7]>1) {XZ[n][0] =1022.5; XZ[n][1] = pospl[2][7][i23]; n++;}
+			 if (n<n1) goto forEnd;
 			 dl = GetLinearPar(XZ,n,hs);
 			 if (dl<dlmax){
                          
@@ -203,7 +209,7 @@ void   EN_MWDC::LookupHits(){
 			}
 		   }	  
 
-   return ;
+ forEnd:   return ;
 }
 // ***********************************************************************
 void   EN_MWDC::SetPosition(){
@@ -336,7 +342,7 @@ int EN_MWDC::ReadParameters(char* filename){
 
        ch = int(valread[1]);
        ywei[ii][jj][ch] = valread[2];
- //      printf("bdc prm  %d\t%d\t%d\t%f\n",ii,jj,ch,ywei[ii][jj][ch]);
+       //      printf("bdc prm  %d\t%d\t%d\t%f\n",ii,jj,ch,ywei[ii][jj][ch]);
     }
      fi.close();
      printf("EN_MWDC: Parameters file :\"%s\" |--> LOADED!!!.\n",filename); 

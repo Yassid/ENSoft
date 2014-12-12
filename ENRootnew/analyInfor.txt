@@ -1,0 +1,90 @@
+analayer 1:  Fiber
+
+1	1	Xmm
+1	2	Ymm
+1	3	number of fiber was hitted
+1	4	maximum witdth
+2	1	Dynode 1
+2	2	Dynode 2
+
+analayer 2:  PPAC
+
+1	1-25 	traw
+2	1-25 	tcal
+3	0-4	X position in ns
+3	5-9	Y position in ns
+4	0-4	X position in mm
+4	5-9	Y position in mm
+5	1	Xmm at F2Viewer
+5	2	Ymm at F2Viewer
+
+analayer 3:  Plastic
+
+1	1  	RF-tref;
+1	2  	Ref-tref;
+1	3  	F1PL_T;
+1	4  	F2PL_T;
+1	5  	F2DPL_LT;
+1	6  	F2DPL_RT; 
+1	7  	F3PL_LT;
+1	8  	F3PL_RT;     
+1	9  	F3DPL_LT;
+1	10 	F3DPL_RT;
+2		Energy
+3	1	F2DPLQevg
+3	2	F3PLQevg
+3	3	F3DSPLQevg
+
+analayer 4:  CsI
+
+1,2	1-16	q,t raw
+4	1-16	q calib
+
+analayer 5:  Neutron detector
+
+analayer 6:  Coincidence
+
+1	1	coin ch
+1	2	number of ch have coin
+1	3	sum ch**2
+
+analayer 7:  MWDC
+
+1	1	Total wires fired
+1	2	Total wires fired of BC1
+1	3	Total wires fired of BC2
+1	4-19	num of wires fired in plane
+2,3	1	Ax,Ay
+2,3	2	X0,Y0
+2,3	3	X_tar,Y_Tar
+analayer 8:  DSSD
+
+1	1-128	XLraw
+2	1-128	YLraw
+3	1-128	XRraw
+4	1-128	YRraw
+
+5	1-128	XLcal
+6	1-128	YLcal
+7	1-128	XRcal
+8	1-128	YRcal
+
+9	1	XLmax
+9	2	YLmax
+9	3	XRmax
+9	4	YRmax
+
+9	5	XLpos
+9	6	YLpos
+9	7	XRpos
+9	8	YRpos
+
+9	9	XL L neibr
+9	10	YL R neibr
+9	11	XR L neibr
+9	12	YR R neibr
+9	13	XL L neibr
+9	14	YL R neibr
+9	15	XR L neibr
+9	16	YR R neibr
+

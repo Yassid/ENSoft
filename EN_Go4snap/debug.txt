@@ -1,0 +1,1 @@
+g++ -c TArtSortProc.cxx -O2  -fPIC -Wall -DLinux -pthread -m64 -I/usr/local/root_5.34/include -I/usr/local/go4-4.6.0/include -I/usr/local/go4-4.6.0 -I/usr/local/anaroot_v4.5.9.2/include -I/usr/local/anaroot_v4.5.9.2/include -o TArtSortProc.o 

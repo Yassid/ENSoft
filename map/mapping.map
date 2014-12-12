@@ -22,7 +22,7 @@
   3  	4	2   	7  	24  	1  	10  	0	0	rRefcommon
   3  	5	2   	7  	24  	1  	12  	0	0	rCsIor
   3  	6	2   	7  	24  	1  	13  	0	0	rSior
-  3  	6	2   	7  	24  	4  	48  	0	0	rSWor
+  3  	8	2   	7  	24  	4  	48  	0	0	rSWor
   3  	7	2   	2  	21  	1  	16  	0	0	rF1PLQ
   4  	1	2   	6  	32  	16  	0  	0	0	rCsIQ
   4  	2	2   	7  	24  	16  	16  	0	0	rCsIT

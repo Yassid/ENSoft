@@ -41,6 +41,18 @@ void   EN_DSSD::ENcode(int raw[10][10][256], double val[10][10][256], int nval )
    val[analyser][9][6] =  posYL;
    val[analyser][9][7] =  posXR;
    val[analyser][9][8] =  posYR;
+
+   if (posXL>1   ) val[analyser][9][9] =  qcal[0][posXL-2];
+   if (posXL<128 ) val[analyser][9][10] = qcal[0][posXL];
+
+   if (posYL>1   ) val[analyser][9][11] =  qcal[0][posYL-2];
+   if (posYL<128 ) val[analyser][9][12] =  qcal[0][posYL];
+   
+   if (posXR>1   ) val[analyser][9][13] =  qcal[0][posXR-2];
+   if (posXR<128 ) val[analyser][9][14] = qcal[0][posXR];
+   if (posYR>0   ) val[analyser][9][15] =  qcal[0][posYR-2];
+   if (posYR<128 ) val[analyser][9][16] =  qcal[0][posYR];
+   }
 }
 // ***********************************************************************
 int EN_DSSD::Calibration(){

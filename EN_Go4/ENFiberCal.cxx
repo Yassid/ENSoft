@@ -26,22 +26,16 @@ void ENFiberCal::ENcode(int raw[10][10][256], double val[10][10][256], int nval 
    }
   DYQ[0] = raw[analyser][3][0];
   DYQ[1] = raw[analyser][3][1];  
-  SetPosition();
+  SetPosition1();
  // printf("F1 af  %d  %f   %f  %f\n",nfire,width,posX,posY1);
   val[analyser][1][1] = posX;
   val[analyser][1][2] = posY1;
   val[analyser][1][3] = nfire;
   val[analyser][1][4] = width;
-  SetPosition1();
- // printf("F1 af  %d  %f   %f  %f\n",nfire,width,posX,posY1);
-  val[analyser][1][5] = posX;
-  val[analyser][1][6] = posY1;
-  val[analyser][1][7] = nfire;
-  val[analyser][1][8] = width;
+  
   val[analyser][2][1] = DYQ[0];
   val[analyser][2][2] = DYQ[1];
-  val[analyser][1][9] = width;
-  val[analyser][1][10] = width; 
+
 }
 // ***********************************************************************
 void  ENFiberCal::SetPosition(int start, int *rawin){

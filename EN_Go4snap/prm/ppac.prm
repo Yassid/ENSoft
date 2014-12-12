@@ -1,0 +1,148 @@
+c ======================================================
+c         RCNP-E372 experiment
+c       Parameter File for PPAC's  ' Edit by Tran Dinh Trong = 2013/04/17
+c For each group include
+c c <name of prm>
+c c comment line
+c F1PPAC
+c F2UPPAC
+c F2DPPAC
+c F3UPPAC
+c F3DPPAC
+c ======================================================
+c
+c <iflag_TDC_cal> calibrated set 1 not set 0
+1
+c <ch2ns> 
+c   L  ->   D   ->    R  ->    U    -> A
+0.05000  0.05000  0.05000  0.05000  0.05000  
+0.09765805 0.09765736 0.09765732 0.09765785 0.09906960
+0.09765771 0.09765804 0.09765819 0.09765901 0.09765514
+0.0977     0.0977     0.0977     0.0978     0.0977
+0.0977     0.0977     0.0977     0.0978     0.0977
+c
+c <iflag_QDC_cal> calibrated set 1 not set 0
+1
+c <qgain> - Gain of QDC
+c   L  ->   D   ->    R  ->    U    -> A
+1.00000  1.00000  1.00000  1.00000  1.00000  
+1.00000  1.00000  1.00000  1.00000  1.00000  
+1.00000  1.00000  1.00000  1.00000  1.00000  
+1.00000  1.00000  1.00000  1.00000  1.00000  
+1.00000  1.00000  1.00000  1.00000  1.00000  
+c
+c <iflag_QDCED_cal> calibrated set 1 not set 0
+1
+c <qped>
+c L  ->   D   ->    R  ->    U    -> A
+51.75   53.2      47.45     51.95  47.31
+0.0   0.0   0.0   0.0   0.0
+0.0   0.0   0.0   0.0   0.0
+0.0   0.0   0.0   0.0   0.0
+0.0   0.0   0.0   0.0   0.0
+c
+c <iflag_ppaccalib> calibration completed -> 1; not completed -> 0
+c ---
+1
+c 
+c <ns2mm> (scaling factor for F1PPAC case)
+c  X     Y
+82.83   34.03
+0.5454 0.5262
+0.5684 0.5568
+0.601461 0.592495 
+0.589249 0.597949 
+c
+c  flag inside offset
+c ---
+1
+c 
+c inoffset value
+c   X       Y(mm)
+-7.262   -4.923
+-2.8068   0.63758
+ 0.36249  0.41813 
+-0.56556  0.62796
+ 0.28715  0.97921 
+c
+c iflag outside offset
+c ---
+1
+c 
+c <outoffset>
+c X  Y(mm)
+ 5.125   -3.145
+ 0.2785  1.9987
+-1.0284  2.3422
+-0.16396 0.88596
+-0.70464 -0.21999 
+c
+c <iflag_geom_offset>
+c ---
+1
+c 
+c <geomoffset>
+c X  Y(mm)
+c 1.047   2.0
+c 11.043  -1.236 
+c 10.619  -2.8195
+c 0.0   0.0
+c 0.0   0.0
+c changed for E407 with additional offset
+ 1.047   2.0
+  0.0   1.5
+  1.0   1.0
+ -1.0   -1.0
+ -1.0   0.0
+c
+c <zpos using F2PPAC>
+c <add or remove please change parameter 'nlayer' in 'ppacprm.fh'
+c ---
+c 1:F2UPPAC,     2:F2DPPAC, 3:F2PL,  4:F2GV,     5:F2VIEWER, 
+c 6:SC-ENTRANCE, 7:TARGET,  8:SC-EXIT,  9:HODOSCOPE
+0.
+482.
+88.
+755.
+855.
+c
+c <zpos using F3PPAC>
+c <add or remove please change parameter 'n3layer' in 'ppacprm.fh'
+c ---
+c 1:F3UPPAC, 2:F3DPPAC, 3:F3ChamEdge,   4:F3Viewer,  5:F3PL
+c 6:MUSIC1,  8:MUSIC8, 9:Si1, 10:Si2, 11: NaI
+0.0
+500.0
+850.0
+910.0
+956.0
+1031.0
+1601.0
+c <iflag_txysum>
+c ---
+1
+c
+c <iflag_txsumgate>
+c ---
+1
+c
+c <txsumgate>
+c TXsum-AT
+c ---
+-1000.  1000.
+102.8  115.8
+98.9   108.4
+-1000.  1000.
+-1000.  1000.
+c
+c <iflag_tysumgate>
+c ---
+1
+c <tysumgate>
+c TYsum-AT
+c ---
+-1000.  1000.
+102.2   112.1
+104.4   113.5
+-1000.  1000.
+-1000.  1000.
