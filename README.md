@@ -18,4 +18,4 @@ map: mapping for experiment.
 
 You need to refer to "How to use" or "readme" in each folder.
 
-Enjoin!!!
+Enjoy!!!
